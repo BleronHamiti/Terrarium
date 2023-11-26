@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./signup.css" />
+    <title>Signup Form</title>
+  </head>
+
+  <body>
+    <span class="home"
+      ><a href="./index.html">Go Home</a>
+      <a href="./index.html"> <img src="./assets/images/home.png" alt="" /></a
+    ></span>
+    <div class="container">
+      <img src="./assets/images/mushroom.png" class="img-top" alt="" />
+      <img src="./assets/images/mushroom1.png" class="img-middle" alt="" />
+      <img src="./assets/images/mushroom2.png" class="img-right" alt="" />
+      <div class="form-section">
+        <h2>Signup Form</h2>
+        <form id="signupForm">
+          <div class="groups">
+            <div class="form-group">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="input-field"
+                required
+              />
+              <span class="label">Name:</span>
+              <span class="error-message" id="nameError"></span>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="surname"
+                name="surname"
+                class="input-field"
+                required
+              />
+              <span class="label">Surname:</span>
+              <span class="error-message" id="surnameError"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="input-field"
+              required
+            />
+            <span class="label">Username:</span>
+            <span class="error-message" id="usernameError"></span>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="input-field"
+              required
+            />
+            <span class="label">Email:</span>
+            <span class="error-message" id="emailError"></span>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="input-field"
+              required
+            />
+            <span class="label">Password:</span>
+            <span class="error-message" id="passwordError"></span>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              class="input-field"
+              required
+            />
+            <span class="label">Confirm Password:</span>
+            <span class="error-message" id="confirm-passwordError"></span>
+          </div>
+          <div class="links">
+            <span class="account"
+              >Already have an account? <a href="./login.html">Login</a>
+            </span>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="./signup.js"></script>
+  </body>
+</html>
