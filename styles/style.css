@@ -31,16 +31,16 @@ header ul li a.link {
 header ul li a.link:after {
   content: "";
   display: block;
-  height: 3px; /* Adjust the thickness of the underline */
+  height: 3px;
   width: 0;
-  background-color: #4a7937; /* Set the color of the underline */
+  background-color: #4a7937;
   position: absolute;
-  bottom: -5px; /* Adjust the distance of the underline from the text */
+  bottom: -5px;
   transition: width 0.3s ease;
 }
 
 header ul li a.link:hover:after {
-  width: 100%; /* Set the width to 100% on hover to create the underline effect */
+  width: 100%;
 }
 header ul {
   display: flex;
@@ -126,13 +126,13 @@ span {
 
 .services-card-holder {
   width: 350px;
-  overflow: hidden; /* Hide overflow content */
+  overflow: hidden;
   display: flex;
   white-space: nowrap;
 }
 
 .services-section {
-  width: 100vw; /* Make sure it doesn't exceed the viewport width */
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -622,10 +622,153 @@ footer {
 }
 @keyframes movePlants {
   0% {
-    transform: translateX(-300px); /* Start position, move from left */
+    transform: translateX(-300px);
   }
   100% {
-    transform: translateX(300px); /* End position, move to the right */
+    transform: translateX(300px);
+  }
+}
+@media (max-width: 1000px) {
+  .footer-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+.modal {
+  z-index: 9999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  height: 80%;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 2rem;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+#modal-image {
+  width: 30%;
+}
+/* Add more styles as needed */
+#plant-form input,
+select {
+  border: none;
+  width: 350px;
+  font-size: 1.3rem;
+  border-radius: 8px;
+  padding: 0.8rem;
+  background-color: white;
+  color: #314c28;
+}
+.inputs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2.5rem;
+}
+#plant-form input:focus,
+select:focus {
+  border: 1px solid #619949;
+  max-width: 350px;
+  font-size: 1.3rem;
+  border-radius: 12px;
+  padding: 0.8rem;
+  outline: none;
+}
+#plant-form button {
+  background-color: #3b5f2e;
+  border: none;
+  width: 175px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 25px;
+  color: white;
+  transition: all 0.7s;
+}
+#plant-form button:hover {
+  background-color: #4a7937;
+  cursor: pointer;
+}
+.group-input {
+  display: flex;
+  flex-direction: column;
+}
+.group-input label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  color: #314c28;
+  font-weight: 600;
+}
+.add-plant-form {
+  margin: 1rem 2rem;
+}
+.add-plant-form h2 {
+  color: #2d4126;
+  font-size: 1.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+#plant-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.footer-thumb {
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  overflow: hidden;
+  width: 300px;
+  margin: 1rem auto;
+}
+.footer-thumb img:nth-child(1) {
+  width: 150px;
+  animation: movePlants 4s linear infinite;
+  margin-right: 150px;
+}
+.footer-thumb img:nth-child(2) {
+  width: 150px;
+  animation: movePlants 4s linear infinite;
+}
+@keyframes movePlants {
+  0% {
+    transform: translateX(-300px);
+  }
+  100% {
+    transform: translateX(300px);
   }
 }
 @media (max-width: 1000px) {

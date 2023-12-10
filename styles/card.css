@@ -1,6 +1,6 @@
 .card-icons {
-  width: 39px;
-  height: 39px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -12,7 +12,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 760px;
+  width: 700px;
   height: auto;
   border-radius: 12px;
   background-color: #7fb566;
@@ -22,20 +22,20 @@
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 }
 .impact-card-title {
-  width: 127px;
+  width: 120px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .impact-card-title h3 {
-  font-size: 24px;
+  font-size: 20px;
   transform: rotate(270deg);
   height: 24px;
   width: 100%;
 }
 .impact button {
-  font-size: 25px;
+  font-size: 22px;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
@@ -68,7 +68,7 @@
   color: white;
 }
 .card-requirments h4 {
-  font-size: 20px;
+  font-size: 18px;
   color: white;
 }
 .card-requirments span {
@@ -76,7 +76,7 @@
   font-size: 1.1rem;
 }
 .plant-care {
-  height: 300px;
+  height: 265px;
 }
 .impact-card img {
   height: 100%;
@@ -142,6 +142,7 @@
 .music h2 {
   margin-bottom: 1rem;
   color: #3b5f2e;
+  text-align: center;
 }
 .schedule {
   display: flex;
