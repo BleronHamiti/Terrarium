@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./user.css" />
+    <link rel="stylesheet" href="./card.css" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="frame-src 'self' https://www.youtube.com;"
+    />
+
+    <title>User</title>
+  </head>
+  <body>
+    <header>
+      <img src="./assets/images/logo.png" alt="TerrariumLogo" width="200px" />
+      <div class="search">
+        <input type="text" placeholder="Search..." />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="user">
+        <div class="time-container" id="current-time"></div>
+        <a href="./user-settings.html"><i class="fa-solid fa-user"></i></a>
+      </div>
+    </header>
+    <main>
+      <div class="side-bar">
+        <ul>
+          <li>
+            <a href="./user.html"><i class="fa-solid fa-house"></i>Home</a>
+          </li>
+          <li>
+            <a href="./plants.html"
+              ><i class="fa-solid fa-seedling"></i>My Plants</a
+            >
+          </li>
+          <li>
+            <a href="#" class="active"
+              ><i class="fa-solid fa-plus"></i>Add new</a
+            >
+          </li>
+          <li>
+            <a href="./discover.html"
+              ><i class="fa-solid fa-magnifying-glass"></i>Discover</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div class="add-plant-form">
+          <h2>Add a New Plant</h2>
+          <form id="plant-form">
+            <div class="inputs">
+              <div class="input-left">
+                <div class="group-input">
+                  <label for="plant-name">Plant Name:</label>
+                  <select id="plant-name" required>
+                    <option value="" disabled selected>Select a plant</option>
+                    <option value="Peace Lily">Peace Lily</option>
+                    <option value="Snake Plant">Snake Plant</option>
+                    <!-- Add more plant options as needed --></select
+                  ><br />
+                </div>
+                <div class="group-input">
+                  <label for="plant-family">Plant Family:</label>
+                  <input type="text" id="plant-family" readonly /><br />
+                </div>
+
+                <div class="group-input">
+                  <label for="light-requirements">Light Requirements:</label>
+                  <input type="text" id="light-requirements" readonly /><br />
+                </div>
+              </div>
+              <div class="input-right">
+                <div class="group-input">
+                  <label for="watering-needs">Watering Needs:</label>
+                  <input type="text" id="watering-needs" readonly /><br />
+                </div>
+                <div class="group-input">
+                  <label for="humidity-levels">Humidity Levels:</label>
+                  <input type="text" id="humidity-levels" readonly /><br />
+                </div>
+                <div class="group-input">
+                  <label for="last-watered">Last Watered:</label>
+                  <input type="date" id="last-watered" /><br />
+                </div>
+              </div>
+            </div>
+            <button type="submit">Add Plant</button>
+          </form>
+        </div>
+        <div class="footer-thumb">
+          <img src="./assets/images/cactus-footer.png" alt="Cute Photo" />
+          <img src="./assets/images/footer-cactus.png" alt="Cute Photo" />
+        </div>
+      </div>
+    </main>
+    <script src="./clock.js"></script>
+    <script src="./addnew.js"></script>
+  </body>
+</html>

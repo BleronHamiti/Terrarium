@@ -235,3 +235,302 @@ main {
   font-size: 1.8rem;
   color: #2d4126;
 }
+
+.add-new-home {
+  background-color: #619949;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 48%;
+  color: white;
+}
+.add-new-home:hover {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+.add-new-home i {
+  font-size: 4rem;
+}
+.add-new-home span {
+  font-size: 2rem;
+}
+.all-plants-home {
+  background-color: white;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 48%;
+}
+.all-plants-home:hover {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+.all-plants-home a {
+  text-decoration: none;
+  padding: 1rem 0.7rem;
+  border: 1px solid #3b5f2e;
+  color: #3b5f2e;
+  font-weight: 500;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+.all-plants-home a:hover {
+  background-color: #f1f8ed;
+}
+.plants-home {
+  display: flex;
+}
+.home-images {
+  background-color: #f1f8ed;
+  border-radius: 0.5rem;
+  width: 200px;
+  height: 200px;
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-images img {
+  height: 100%;
+}
+.content-home {
+  display: flex;
+  justify-content: space-around;
+}
+.noti-banner {
+  background-color: #f1f8ed;
+  border: 1px solid #7fb566;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.noti-banner i {
+  color: #7fb566;
+  font-size: 1.6rem;
+  margin: 1rem;
+}
+.noti-banner p {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  font-size: 1.3rem;
+}
+.noti-banner a {
+  text-decoration: none;
+  padding: 1rem 0.7rem;
+  border: 1px solid #3b5f2e;
+  color: #3b5f2e;
+  font-weight: 500;
+  border-radius: 8px;
+  margin: 1rem 0;
+  margin-left: 1rem;
+}
+.noti-banner a:hover {
+  background-color: #e1eed9;
+}
+.discover-home {
+  width: 100%;
+  height: 300px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin: 1rem;
+  position: relative;
+  transition: all 0.7s;
+}
+.discover-home img {
+  width: 100%;
+  object-fit: cover;
+}
+.discover {
+  background-color: #c5dfb7;
+  opacity: 0.3;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: -100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.7s;
+}
+.discover h2 {
+  font-size: 2rem;
+  opacity: 1;
+  color: black;
+}
+.discover i {
+  font-size: 2.5rem;
+  margin: 1rem;
+}
+.discover-home:hover .discover {
+  cursor: pointer;
+  position: absolute;
+  transform: translateY(-100%);
+}
+.profile-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.profile-info .container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile-pic {
+  width: 200px;
+  height: 200px;
+  border: 1rem solid #c5dfb7;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#profileImage {
+  height: 100%;
+  object-fit: cover;
+}
+
+button {
+  margin-top: 20px;
+}
+/* Styles for the modal */
+.modalProfile {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-profile-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  height: 50%;
+  border-radius: 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.custom-file-input {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: transparent;
+  color: #4a7937;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  border: #4a7937 1px solid;
+}
+
+.custom-file-input:hover {
+  background-color: #e1eed9;
+}
+
+/* Hide the actual file input */
+.file-input-hidden {
+  display: none;
+}
+#editButton,
+#modalSaveButton,
+#ProfileForm button {
+  background-color: #3b5f2e;
+  border: none;
+  width: 175px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 25px;
+  color: white;
+  transition: all 0.5s;
+}
+
+#editButton:hover,
+#modalSaveButton:hover,
+#ProfileForm button:hover {
+  background-color: #4a7937;
+  cursor: pointer;
+}
+#editButton i {
+  margin-right: 1.5rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.form-group input {
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: #314c28;
+}
+#ProfileForm input:focus {
+  border: 1px solid #314c28;
+  outline: none;
+}
+.form-group span {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2d4126;
+}
+.profile-settings {
+  width: 40%;
+}
+.profile-info .container {
+  background-color: #f1f8ed;
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+}
+.profile-plants {
+  font-size: 1.2rem;
+  margin: 1rem;
+  color: #2d4126;
+}
