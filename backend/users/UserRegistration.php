@@ -8,7 +8,6 @@ class UserRegistration {
     }
 
     public function registerUser(User $user) {
-        
         if (!$this->validateUserData($user)) {
             return false;
         }
@@ -25,7 +24,6 @@ class UserRegistration {
         $stmt = $connection->prepare($query);
         $stmt->execute([$user->getName(), $user->getSurname(), $user->getEmail(), $user->getPassword()]);
 
-        
         return $stmt->rowCount() > 0;
     }
 
@@ -43,23 +41,32 @@ class UserRegistration {
 
         return $count > 0;
     }
+
     public function checkLoginCredentials(User $user) {
         $email = $user->getEmail();
         $query = "SELECT * FROM users WHERE user_email = :email";
         $statement = $this->database->getConnection()->prepare($query);
         $statement->bindParam(':email', $email);
         $statement->execute();
-
+    
         $userData = $statement->fetch(PDO::FETCH_ASSOC);
-
+    
         if ($userData && password_verify($user->getPassword(), $userData['user_password'])) {
-            $user->setUserId($userData['user_id']);
-           
-            return true; 
+            $loggedInUser = new User(
+                $userData['user_name'],
+                $userData['user_surname'],
+                $userData['user_email'],
+                '', 
+                $userData['user_role']
+            );
+            $loggedInUser->setUserId($userData['user_id']);
+            return $loggedInUser; 
         }
-
+    
         return false;
     }
+    
+
     public function getUserById($userId) {
         $query = "SELECT * FROM users WHERE user_id = :user_id"; 
         $statement = $this->database->getConnection()->prepare($query);
@@ -69,42 +76,33 @@ class UserRegistration {
         $row = $statement->fetch(PDO::FETCH_ASSOC);
         if ($row) {
            
-            $user = new User($row['user_name'], $row['user_surname'], $row['user_email'], $row['user_password']);
+            $user = new User($row['user_name'], $row['user_surname'], $row['user_email'], $row['user_password'],$row['user_role']);
             $user->setUserId($row['user_id']); 
             return $user;
         } else {
             return null; 
         }
     }
-    public function updateUserInfo($userId, $name, $surname, $email, $password) {
-        $sql = "UPDATE users SET user_name = :user_name, user_surname = :user_surname, user_email = :user_email";
-       
-        // $stmt->bindParam(':user_name', $name);
-        // $stmt->bindParam(':user_surname', $surname);
-        // $stmt->bindParam(':user_email', $email);
-        // $stmt->bindParam(':user_password', $password);
-        // $stmt->bindParam(':user_id', $userId);
-        $params = [
-            ':user_name' => $name,
-            ':user_surname' => $surname,
-            ':user_email' => $email,
-            
-        ];
-        
-        
-        if (isset($hashedPassword)) {
-            $sql .= ", user_password = :user_password"; 
-            $params[':user_password'] = $hashedPassword;
+
+    public function updateUser($userId, $name, $surname, $email, $password) {
+        $existingUser = $this->getUserById($userId);
+        if (!$existingUser) {
+            return false;
         }
-        
-       
-        $sql .= " WHERE user_id = :user_id";
-        $params[':user_id'] = $userId;
-        
-        $stmt = $this->database->getConnection()->prepare($sql);;
-        return  $stmt->execute($params);
+
+        if (!empty($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        } else {
+            $hashedPassword = $existingUser->getPassword();
+        }
+
+        $connection = $this->database->getConnection();
+        $query = "UPDATE users SET user_name = ?, user_surname = ?, user_email = ?, user_password = ? WHERE user_id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->execute([$name, $surname, $email, $hashedPassword, $userId]);
+
+        return $stmt->rowCount() > 0;
     }
-    
 }
 
 ?>

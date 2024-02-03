@@ -1,5 +1,5 @@
 <?php
- session_start();
+session_start();
 
 require_once '../server/config.php';
 require_once './User.php';
@@ -13,9 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $database = new DatabaseConnection();
 
-    $newUser = new User($name, $surname, $email, $password);
+    $newUser = new User($name, $surname, $email, $password, 'user');
 
-  
     $userRegistration = new UserRegistration($database);
 
     $registrationResult = $userRegistration->registerUser($newUser);
@@ -25,10 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../../structure/home.php");
         exit();
     } else {
-        $_SESSION['email_exits'] = "A user with that email already exists!";
+        $_SESSION['email_exists'] = "A user with that email already exists!";
         header("Location: ../../structure/signup.php");
     }
 } else {
    echo json_encode(['success' => false, 'errors' => ['registration' => 'Registration failed']]);
-    
 }
+?>
