@@ -52,10 +52,11 @@ header ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 17%;
+  gap: 8%;
+  padding: 0 15%;
 }
 .hero-content__thumb {
-  max-width: 500px;
+  max-width: 214px;
 }
 .hero-content__thumb img {
   width: 100%;
@@ -63,13 +64,13 @@ header ul {
 .hero-content__text {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 .hero-content__text h1 {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 .hero-content__text p {
-  font-size: 30px;
+  font-size: 26px;
 }
 .hero-content__text button {
   background-color: #3b5f2e;
@@ -77,7 +78,7 @@ header ul {
   width: 175px;
   padding: 10px;
   border-radius: 8px;
-  font-size: 25px;
+  font-size: 22px;
   color: #e3f2f2;
 }
 .hero-content__text button:hover {
@@ -418,7 +419,7 @@ div .dot {
 .services svg {
   width: 100%;
   position: absolute;
-  top: -333px;
+  top: -220px;
 }
 #hero {
   height: 80vh;
@@ -771,6 +772,90 @@ select:focus {
     transform: translateX(300px);
   }
 }
+#responsive-services {
+  display: none;
+  padding: 15px;
+
+  overflow-x: scroll;
+}
+
+.row {
+  width: auto;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 261px;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 0px;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.card-thumb {
+  padding: 18px;
+  border-bottom-right-radius: 30px;
+  background-color: #e1eed9;
+}
+.card-thumb img {
+  height: 50px;
+}
+.card p {
+  padding: 20px;
+}
+.column {
+  height: 195px;
+  margin: 16px;
+}
+header img {
+  width: 200px;
+}
+#menu {
+  display: none;
+  width: 42px;
+  margin-right: 10px;
+}
+#close {
+  display: none;
+  margin-right: 10px;
+  width: 35px;
+  margin-right: 10px;
+  position: absolute;
+  right: 22px;
+}
+@media (max-width: 1095px) {
+  .services {
+    display: none;
+  }
+  #hero {
+    height: auto;
+  }
+  #responsive-services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-content {
+    padding: 10% 10%;
+  }
+}
 @media (max-width: 1000px) {
   .footer-section {
     width: 100%;
@@ -778,5 +863,105 @@ select:focus {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+  }
+}
+@media (max-width: 820px) {
+  header {
+    margin: 1rem 10px;
+  }
+}
+@media (max-width: 767px) {
+  .hero-content__thumb img {
+    display: none;
+  }
+  .hero-content__text h1 {
+    font-size: 2.2rem !important;
+  }
+  .hero-content__text p {
+    font-size: 20px;
+  }
+  .hero-content__text button {
+    font-size: 20px;
+  }
+  #responsive-services {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  .impact-card {
+    width: 300px;
+    justify-content: space-between;
+  }
+  .impact-card-title {
+    display: none;
+  }
+  .plant-care {
+    height: 165px;
+  }
+  .plant-needs {
+    gap: 0;
+    position: static;
+    padding: 18px;
+  }
+  .plant-needs__card {
+    margin-left: 0;
+  }
+  .card-icons {
+    width: 24px;
+    height: 24px;
+  }
+  .plant-needs__card i {
+    font-size: 16px;
+  }
+  .card-requirments h4 {
+    font-size: 13px;
+  }
+  .card-requirments span {
+    font-size: 12px;
+  }
+  .footer-thumb img:nth-child(2) {
+    width: 80px;
+  }
+  .footer-thumb img:nth-child(1) {
+    width: 80px;
+  }
+  .impact button {
+    font-size: 17px;
+  }
+  .footer-buttons button {
+    font-size: 16px;
+  }
+  .footer-menu a {
+    font-size: 16px;
+  }
+  .impact h2 {
+    font-size: 24px;
+    margin: 1rem 0rem;
+    text-align: center;
+  }
+  header img {
+    width: 100px;
+  }
+  #menu {
+    display: block;
+  }
+  .menu-list {
+    display: none;
+  }
+  .show {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    background: white;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    justify-content: center;
+    z-index: 100;
+  }
+  .active {
+    display: block !important;
+    z-index: 101;
   }
 }

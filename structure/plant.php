@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) { 
+   header("Location: ./login.php");
+   exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,48 +43,136 @@
       </div>
       <div class="user">
         <div class="time-container" id="current-time"></div>
-        <a href="./user-settings.html"><i class="fa-solid fa-user"></i></a>
+        <a href="./user-settings.php"><i class="fa-solid fa-user"></i></a>
       </div>
+      <img src="../assets/images/close.png" alt="" id="close">
+        <img src="../assets/images/menu.png" alt="" id="menu">
     </header>
     <main>
-      <div class="side-bar">
+      <div class="side-bar" id="side-bar">
         <ul>
           <li>
             <a href="#" class="active"><i class="fa-solid fa-house"></i>Home</a>
           </li>
           <li>
-            <a href="./plants.html"
+            <a href="./plants.php"
               ><i class="fa-solid fa-seedling"></i>My Plants</a
             >
           </li>
           <li>
-            <a href="./addnew.html"><i class="fa-solid fa-plus"></i>Add new</a>
+            <a href="./addnew.php"><i class="fa-solid fa-plus"></i>Add new</a>
           </li>
           <li>
-            <a href="./discover.html"
+            <a href="./discover.php"
               ><i class="fa-solid fa-magnifying-glass"></i>Discover</a
             >
           </li>
         </ul>
       </div>
       <div class="main-content">
+      <?php
+
+
+require_once '../backend/plants/watering.php';
+
+
+
+$plantId = isset($_GET['plant_id']) ? $_GET['plant_id'] : null;
+
+
+$plantId = filter_var($plantId, FILTER_VALIDATE_INT);
+
+if ($plantId === false || $plantId <= 0) {
+    echo "Invalid plant ID.";
+    exit;
+}
+require_once '../backend/plants/plant.php';
+$plant = Plant::getPlantById($plantId);
+
+
+
+
+if ($plantId === false || $plantId <= 0) {
+    echo "Invalid plant ID.";
+    exit;
+}
+
+
+$dateTimeObject = new DateTime('2022-01-13');
+$dateString = $dateTimeObject->format('Y-m-d');
+
+$watering = Watering::getWateringByPlantId($plantId);
+
+if (!$watering) {
+    
+    echo "Plant not found.";
+    exit;
+}
+
+
+$wateringDates = $watering->calculateAllWateringDates();
+
+
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+
+if ($action === 'updateLastWateredDate') {
+    $requestData = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($requestData['lastWateredDate'])) {
+        $plantId = isset($_GET['plant_id']) ? $_GET['plant_id'] : null;
+        $lastWateredDate = $requestData['lastWateredDate'];
+
+        $watering = Watering::getWateringByPlantId($plantId);
+
+        if ($watering) {
+            $result = $watering->updateLastWateredDate($lastWateredDate);
+
+            if ($result) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['error' => 'Failed to update last watered date']);
+            }
+        } else {
+            echo json_encode(['error' => 'Plant not found']);
+        }
+    } else {
+        echo json_encode(['error' => 'Invalid request']);
+    }
+
+    exit;
+}
+
+?>
+
         <div class="info">
           <div class="impact-card">
             <div class="plant-care">
-              <img src="../assets/images/image-snake.png" alt="Peace Lily" />
+              <img src="<?php if ($plant) {
+                      echo "../".$plant->getImagePath();
+                    } else {
+                        echo "Plant not found.";
+                    }?>" alt="Peace Lily" />
             </div>
             <div class="plant-group">
               <div class="plant-info">
                 <div class="plant-needs__card">
                   <div class="card-requirments">
                     <h4>Plant Name:</h4>
-                    <span>Peace Lily</span>
+                    <span><?php if ($plant) {
+                      echo $plant->getName();
+                    } else {
+                        echo "Plant not found.";
+                    }?></span>
                   </div>
                 </div>
                 <div class="plant-needs__card">
                   <div class="card-requirments">
                     <h4>Family name:</h4>
-                    <span>Araceae</span>
+                    <span><?php if ($plant) {
+                      echo $plant->getspecies();
+                    } else {
+                        echo "Plant not found.";
+                    }?></span>
                   </div>
                 </div>
                 <div class="plant-needs__card">
@@ -140,7 +237,8 @@
                 <i class="fa-solid fa-chevron-right"></i>
               </button>
             </div>
-            <div class="calendar-container">
+            
+            <div class="calendar-container" data-plant-id="<?php echo $plantId; ?>">
               <table id="calendar">
                 <thead>
                   <tr>
@@ -156,6 +254,8 @@
               </table>
             </div>
           </div>
+              
+           
           <div class="music">
             <h2>Plants can hear us, here's some music</h2>
             <iframe
@@ -167,7 +267,13 @@
         </div>
       </div>
     </main>
+   
+
     <script src="../functionalities/clock.js"></script>
+    <script>
+  var wateringDates = <?php echo json_encode($wateringDates);?>;
+</script>
     <script src="../functionalities/calendar.js"></script>
+    <script src="../functionalities/responsive.js"></script>
   </body>
 </html>

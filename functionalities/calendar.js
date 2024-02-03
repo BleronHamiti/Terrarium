@@ -2,12 +2,23 @@ const calendar = document.getElementById("calendar");
 const monthYearDisplay = document.getElementById("monthYear");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const wateringDaysCountDisplay = document.getElementById("wateringDaysCount");
 
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
-const wateringDaysCountDisplay = document.getElementById("wateringDaysCount");
-
 let wateringDaysCount = 0;
+let needswatering = 0;
+wateringDates = window.wateringDates || [];
+const calendarContainer = document.querySelector(".calendar-container");
+let plantId;
+console.log(wateringDates);
+
+if (calendarContainer) {
+  plantId = calendarContainer.dataset.plantId;
+  console.log(plantId);
+} else {
+  console.log("Calendar container not found");
+}
 
 function updateCalendar() {
   function createCalendar(month, year) {
@@ -35,11 +46,18 @@ function updateCalendar() {
         calendarHTML += "</tr><tr>";
       }
 
-      if (date == 7 || date == 12) {
+      const isWateringDay = wateringDates.includes(
+        `${year}-${(month + 1).toString().padStart(2, "0")}-${date
+          .toString()
+          .padStart(2, "0")}`
+      );
+
+      if (isWateringDay) {
         calendarHTML += `<td><div class="needs-watering">${date}</div></td>`;
       } else {
         calendarHTML += `<td><div>${date}</div></td>`;
       }
+
       date++;
     }
 
@@ -49,7 +67,6 @@ function updateCalendar() {
   }
 
   createCalendar(currentMonth, currentYear);
-  monthYearDisplay.textContent = `${getMonthName(currentMonth)} ${currentYear}`;
   monthYearDisplay.textContent = `${getMonthName(currentMonth)} ${currentYear}`;
   wateringDaysCountDisplay.textContent = `Number of Watering Days: ${wateringDaysCount}`;
 }
@@ -171,11 +188,76 @@ calendar.addEventListener("click", function (event) {
   }
 
   if (clickedCell) {
+    const date = clickedCell.textContent.trim();
+    const index = wateringDates.indexOf(date);
+
     if (clickedCell.classList.contains("watering-day")) {
       clickedCell.classList.remove("watering-day");
+      if (index !== -1) {
+        wateringDates.splice(index, 1);
+      }
     } else {
       clickedCell.classList.add("watering-day");
+      if (index === -1) {
+        wateringDates.push(date);
+      }
     }
+
     updateWateringDaysCount();
+
+    // Send updated wateringDates array to the backend
+    updateWateringInDatabase(wateringDates);
   }
 });
+
+// function updateWateringInDatabase(updatedWateringDates) {
+//   const plantId = calendarContainer.dataset.plantId;
+
+//   // Get the last watered date from the calendar
+//   const lastWateredDateCell = document.querySelector(".watering-day");
+//   const lastWateredDate = lastWateredDateCell
+//     ? lastWateredDateCell.textContent.trim()
+//     : null;
+
+//   // Make an asynchronous request to the backend to update watering information
+//   fetch(`../structure/plant.php?plant_id=${plantId}`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       wateringDates: updatedWateringDates,
+//       lastWateredDate: lastWateredDate,
+//     }),
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // Handle the response from the backend if needed
+//       console.log("Watering information updated in the database:", data);
+//     })
+//     .catch((error) => {
+//       console.error("Error updating watering information:", error);
+//     });
+
+//   // Update the last watered date separately
+//   fetch(
+//     `../structure/plant.php?action=updateLastWateredDate&plant_id=${plantId}`,
+//     {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         lastWateredDate: lastWateredDate,
+//       }),
+//     }
+//   )
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // Handle the response from the backend if needed
+//       console.log("Last watered date updated in the database:", data);
+//     })
+//     .catch((error) => {
+//       console.error("Error updating last watered date:", error);
+//     });
+// }

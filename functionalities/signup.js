@@ -1,27 +1,25 @@
 const form = document.getElementById("signupForm");
 const nameInput = document.getElementById("name");
 const surnameInput = document.getElementById("surname");
-const usernameInput = document.getElementById("username");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const confirmPasswordInput = document.getElementById("confirm-password");
 const nameError = document.getElementById("nameError");
 const surnameError = document.getElementById("surnameError");
-const usernameError = document.getElementById("usernameError");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
 const confirmPasswordError = document.getElementById("confirm-passwordError");
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
+  console.log("Form submitted!");
   let isValid = true;
   nameError.textContent = "";
   surnameError.textContent = "";
-  usernameError.textContent = "";
+
   emailError.textContent = "";
   passwordError.textContent = "";
   confirmPasswordError.textContent = "";
 
-  // Validate name
   if (nameInput.value === "") {
     isValid = false;
     nameInput.classList.add("error");
@@ -30,7 +28,6 @@ form.addEventListener("submit", function (event) {
     nameInput.classList.remove("error");
   }
 
-  // Validate surname
   if (surnameInput.value === "") {
     isValid = false;
     surnameInput.classList.add("error");
@@ -39,20 +36,6 @@ form.addEventListener("submit", function (event) {
     surnameInput.classList.remove("error");
   }
 
-  // Validate username
-  if (usernameInput.value === "") {
-    isValid = false;
-    usernameInput.classList.add("error");
-    usernameError.textContent = "Username is required";
-  } else if (usernameInput.value.length < 2) {
-    isValid = false;
-    usernameInput.classList.add("error");
-    usernameError.textContent = "Username must be at least 2 characters long";
-  } else {
-    usernameInput.classList.remove("error");
-  }
-
-  // Validate email
   if (emailInput.value === "") {
     isValid = false;
     emailInput.classList.add("error");

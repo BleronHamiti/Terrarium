@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) { 
+   header("Location: ./login.php");
+   exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,17 +42,20 @@
       </div>
       <div class="user">
         <div class="time-container" id="current-time"></div>
-        <a href="./user-settings.html"><i class="fa-solid fa-user"></i></a>
+        <a href="./user-settings.php"><i class="fa-solid fa-user"></i></a>
+        
       </div>
+      <img src="../assets/images/close.png" alt="" id="close">
+        <img src="../assets/images/menu.png" alt="" id="menu">
     </header>
     <main>
-      <div class="side-bar">
+      <div class="side-bar" id="side-bar">
         <ul>
           <li>
-            <a href="./plant.html"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="./home.php"><i class="fa-solid fa-house"></i>Home</a>
           </li>
           <li>
-            <a href="./plants.html"
+            <a href="./plants.php"
               ><i class="fa-solid fa-seedling"></i>My Plants</a
             >
           </li>
@@ -53,7 +65,7 @@
             >
           </li>
           <li>
-            <a href="./discover.html"
+            <a href="./discover.php"
               ><i class="fa-solid fa-magnifying-glass"></i>Discover</a
             >
           </li>
@@ -62,52 +74,65 @@
       <div class="main-content">
         <div class="add-plant-form">
           <h2>Add a New Plant</h2>
-          <form id="plant-form">
+          <form
+            id="plant-form"
+            action="../backend/plants/addPlant.php"
+            method="POST"
+            enctype="multipart/form-data"
+          >
             <div class="inputs">
               <div class="input-left">
                 <div class="group-input">
                   <label for="plant-name">Plant Name:</label>
-                  <select id="plant-name" required>
-                    <option value="" disabled selected>Select a plant</option>
-                    <option value="Peace Lily">Peace Lily</option>
-                    <option value="Snake Plant">Snake Plant</option></select
-                  ><br />
+                  <input type="text" id="plant-name" name="plant-name" />
+                  <br />
                 </div>
                 <div class="group-input">
-                  <label for="plant-family">Plant Family:</label>
-                  <input type="text" id="plant-family" readonly /><br />
+                  <label for="plant-species">Plant Family:</label>
+                  <input
+                    type="text"
+                    id="plant-species"
+                    name="plant-species"
+                  /><br />
                 </div>
 
                 <div class="group-input">
-                  <label for="light-requirements">Light Requirements:</label>
-                  <input type="text" id="light-requirements" readonly /><br />
+                  <label for="watering-frequency"
+                    >Watering Frequency In Days</label
+                  >
+                  <input
+                    type="number"
+                    id="watering-frequency"
+                    name="watering-frequency"
+                  /><br />
                 </div>
               </div>
               <div class="input-right">
                 <div class="group-input">
-                  <label for="watering-needs">Watering Needs:</label>
-                  <input type="text" id="watering-needs" readonly /><br />
-                </div>
-                <div class="group-input">
-                  <label for="humidity-levels">Humidity Levels:</label>
-                  <input type="text" id="humidity-levels" readonly /><br />
-                </div>
-                <div class="group-input">
                   <label for="last-watered">Last Watered:</label>
-                  <input type="date" id="last-watered" /><br />
+                  <input
+                    type="date"
+                    id="last-watered"
+                    name="last-watered"
+                  /><br />
+                </div>
+                <div class="group-input">
+                  <label for="plant-picture">Upload Plant Picture:</label>
+                  <input
+                    type="file"
+                    id="plant-picture"
+                    name="plant-picture"
+                  /><br />
                 </div>
               </div>
             </div>
             <button type="submit">Add Plant</button>
           </form>
         </div>
-        <div class="footer-thumb">
-          <img src="../assets/images/cactus-footer.png" alt="Cute Photo" />
-          <img src="../assets/images/footer-cactus.png" alt="Cute Photo" />
-        </div>
       </div>
     </main>
     <script src="../functionalities/clock.js"></script>
-    <script src="../functionalities/addnew.js"></script>
+    <script src="../functionalities/addnew.jsos"></script>
+    <script src="../functionalities/responsive.js"></script>
   </body>
 </html>

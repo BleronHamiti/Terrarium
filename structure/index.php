@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,12 +25,20 @@
   </head>
   <body>
     <header>
-      <img src="../assets/images/logo.png" alt="TerrariumLogo" width="200px" />
-      <ul>
+      <img src="../assets/images/logo.png" alt="TerrariumLogo" />
+      <ul class="menu-list" id="menu-list">
         <li><a href="#" class="link">Home</a></li>
-        <li><a href="./login.html" class="link">Login</a></li>
-        <li><a href="./signup.html" class="signup-btn">Sign up</a></li>
+        <?php if (isset($_SESSION['user_id'])) { ?>
+          <li><a href="./home.php" class="link">Plants</a></li>
+        <?php } ?>
+
+        <?php if (!isset($_SESSION['user_id'])) { ?>
+           <li><a href="./login.php" class="link">Login</a></li>
+           <li><a href="./signup.php" class="signup-btn">Sign up</a></li>
+        <?php } ?>
       </ul>
+      <img src="../assets/images/close.png" alt="close" id="close">
+      <img src="../assets/images/menu.png" alt="menu" id="menu">
     </header>
     <main>
       <section id="hero">
@@ -134,6 +145,40 @@
           src="../assets/images/image-from-rawpixel-id-7419199-original.png"
           alt=""
         />
+      </section>
+      <section id="responsive-services">
+      <div class="row">
+        <div class="column">
+          <div class="card">
+            
+            <div class="card-thumb">
+              <img src="../assets/images/waterin.png" alt="">
+            <h3>Watering Care</h3>
+          </div>
+           
+            <p>Watering Reminder</p>
+            
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card">
+          <div class="card-thumb">
+              <img src="../assets/images/light.png" alt="">
+              <h3>Adequate Lighting</h3>
+          </div>  
+            <p>Customized Lighting</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+          <div class="card-thumb">
+              <img src="../assets/images/soil.png" alt="">
+              <h3>Soil Care & More</h3>
+          </div>
+            <p>Care Tips For Each Plant</p>
+          </div>
+        </div>
       </section>
       <section class="impact">
         <h2>Everything you need to know about your plants</h2>
@@ -322,5 +367,6 @@
       </p>
     </footer>
     <script src="../functionalities/index.js"></script>
+    
   </body>
 </html>

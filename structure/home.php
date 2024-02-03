@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) { 
+   header("Location: ./login.php");
+   exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,29 +42,32 @@
       </div>
       <div class="user">
         <div class="time-container" id="current-time"></div>
-        <a href="./user-settings.html"><i class="fa-solid fa-user"></i></a>
+        <a href="./user-settings.php"><i class="fa-solid fa-user"></i></a>
       </div>
+      <img src="../assets/images/close.png" alt="" id="close">
+        <img src="../assets/images/menu.png" alt="" id="menu">
     </header>
     <main>
-      <div class="side-bar">
+      <div class="side-bar" id="side-bar">
         <ul>
           <li>
             <a href="#" class="active"><i class="fa-solid fa-house"></i>Home</a>
           </li>
           <li>
-            <a href="./plants.html"
+            <a href="./plants.php"
               ><i class="fa-solid fa-seedling"></i>My Plants</a
             >
           </li>
           <li>
-            <a href="./addnew.html"><i class="fa-solid fa-plus"></i>Add new</a>
+            <a href="./addnew.php"><i class="fa-solid fa-plus"></i>Add new</a>
           </li>
           <li>
-            <a href="./discover.html"
+            <a href="./discover.php"
               ><i class="fa-solid fa-magnifying-glass"></i>Discover</a
             >
           </li>
         </ul>
+       
       </div>
       <div class="main-content">
         <div class="noti-banner">
@@ -65,10 +77,10 @@
           <a href="./plants.html">Go to plants</a>
         </div>
         <div class="content-home">
-          <div class="add-new-home">
+          <a class="add-new-home" href="./addnew.php">
             <i class="fa-solid fa-plus"></i>
             <span>Add a new plant</span>
-          </div>
+</a>
           <div class="all-plants-home">
             <div class="plants-home">
               <div class="home-images">
@@ -82,7 +94,7 @@
               </div>
             </div>
 
-            <a href="./plants.html">View Your Plants</a>
+            <a href="./plants.php">View Your Plants</a>
           </div>
         </div>
         <div class="wrap-discover">
@@ -99,5 +111,6 @@
       </div>
     </main>
     <script src="../functionalities/clock.js"></script>
+    <script src="../functionalities/responsive.js"></script>
   </body>
 </html>

@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header("Location: ./home.php");
+    exit(); 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,8 +17,8 @@
 
   <body>
     <span class="home"
-      ><a href="./index.html">Go Home</a>
-      <a href="./index.html"> <img src="../assets/images/home.png" alt="" /></a
+      ><a href="./index.php">Go Home</a>
+      <a href="./index.php"> <img src="../assets/images/home.png" alt="" /></a
     ></span>
     <div class="container">
       <img src="../assets/images/mushroom.png" class="img-top" alt="" />
@@ -18,7 +26,12 @@
       <img src="../assets/images/mushroom2.png" class="img-right" alt="" />
       <div class="form-section">
         <h2>Login Form</h2>
-        <form id="signupForm">
+        <span id="creds_error"> <?php
+              if (isset($_SESSION['creds_error'])) {
+              echo($_SESSION['creds_error']);
+              unset($_SESSION['creds_error']);
+            }?></span></span>
+        <form id="signupForm" action="../backend/users/login.php" method="POST">
           <div class="form-group">
             <input
               type="email"
@@ -43,7 +56,7 @@
           </div>
           <div class="links">
             <span class="account"
-              >Dont have an account? <a href="./signup.html">Create new</a>
+              >Dont have an account? <a href="./signup.php">Create new</a>
             </span>
           </div>
           <button type="submit">Submit</button>
@@ -51,6 +64,7 @@
       </div>
     </div>
 
-    <script src="../functionalities/signup.js"></script>
+    <script src="../functionalities/signupp.js"></script>
+    
   </body>
 </html>

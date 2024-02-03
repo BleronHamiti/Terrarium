@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header("Location: ./home.php");
+    exit(); 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,8 +17,8 @@
 
   <body>
     <span class="home"
-      ><a href="./index.html">Go Home</a>
-      <a href="./index.html"> <img src="../assets/images/home.png" alt="" /></a
+      ><a href="./index.php">Go Home</a>
+      <a href="./index.php"> <img src="../assets/images/home.png" alt="" /></a
     ></span>
     <div class="container">
       <img src="../assets/images/mushroom.png" class="img-top" alt="" />
@@ -18,7 +26,11 @@
       <img src="../assets/images/mushroom2.png" class="img-right" alt="" />
       <div class="form-section">
         <h2>Signup Form</h2>
-        <form id="signupForm">
+        <form
+          id="signupForm"
+          action="../backend/users/registration.php"
+          method="POST"
+        >
           <div class="groups">
             <div class="form-group">
               <input
@@ -43,18 +55,7 @@
               <span class="error-message" id="surnameError"></span>
             </div>
           </div>
-          <div class="form-group">
-            <input
-              type="text"
-              id="username"
-              name="username"
-              class="input-field"
-              required
-            />
-            <span class="label">Username:</span>
-            <span class="error-message" id="usernameError"></span>
-          </div>
-
+         
           <div class="form-group">
             <input
               type="email"
@@ -64,7 +65,13 @@
               required
             />
             <span class="label">Email:</span>
-            <span class="error-message" id="emailError"></span>
+            <div class="error-message" id="registrationError"></div>
+            <span class="error-message" id="emailError">
+              <?php
+              if (isset($_SESSION['email_exits'])) {
+              echo($_SESSION['email_exits']);
+              unset($_SESSION['email_exits']);
+            }?></span>
           </div>
           <div class="form-group">
             <input
@@ -90,7 +97,7 @@
           </div>
           <div class="links">
             <span class="account"
-              >Already have an account? <a href="./login.html">Login</a>
+              >Already have an account? <a href="./login.php">Login</a>
             </span>
           </div>
           <button type="submit">Submit</button>
@@ -99,5 +106,6 @@
     </div>
 
     <script src="../functionalities/signup.js"></script>
+    <script src="../functionalities/responsive.js"></script>
   </body>
 </html>

@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) { 
+   header("Location: ./login.php");
+   exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,9 +34,7 @@
 
     <title>User</title>
     <style>
-      .impact-card {
-        width: 670px;
-      }
+      
       .impact-card:hover {
         cursor: pointer;
       }
@@ -45,22 +52,24 @@
       </div>
       <div class="user">
         <div class="time-container" id="current-time"></div>
-        <a href="./user-settings.html"><i class="fa-solid fa-user"></i></a>
+        <a href="./user-settings.php"><i class="fa-solid fa-user"></i></a>
       </div>
+      <img src="../assets/images/close.png" alt="" id="close">
+        <img src="../assets/images/menu.png" alt="" id="menu">
     </header>
     <main>
-      <div class="side-bar">
+      <div class="side-bar" id="side-bar">
         <ul>
           <li>
-            <a href="./plant.html"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="./home.php"><i class="fa-solid fa-house"></i>Home</a>
           </li>
           <li>
-            <a href="./plants.html"
+            <a href="./plants.php"
               ><i class="fa-solid fa-seedling"></i>My Plants</a
             >
           </li>
           <li>
-            <a href="./addnew.html"><i class="fa-solid fa-plus"></i>Add new</a>
+            <a href="./addnew.php"><i class="fa-solid fa-plus"></i>Add new</a>
           </li>
           <li>
             <a href="test" class="active"
@@ -304,5 +313,6 @@
     </main>
     <script src="../functionalities/clock.js"></script>
     <script src="../functionalities/modal.js"></script>
+    <script src="../functionalities/responsive.js"></script>
   </body>
 </html>

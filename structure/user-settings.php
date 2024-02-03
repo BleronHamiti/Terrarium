@@ -1,3 +1,30 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) { 
+   header("Location: ./login.php");
+   exit();
+}
+
+
+require_once '../backend/server/config.php'; 
+require_once '../backend/users/User.php';
+require_once '../backend/users/UserRegistration.php';
+require_once '../backend/plants/plantsCollection.php';
+$userId = $_SESSION['user_id'];
+
+$database = new DatabaseConnection();
+
+$userRegistration = new UserRegistration($database);
+
+
+$user = $userRegistration->getUserById($userId);
+$plantsCollection = new PlantsCollection($userId);
+$plantCount = $plantsCollection->getPlantCount();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,32 +60,40 @@
       </div>
       <div class="user">
         <div class="time-container" id="current-time"></div>
-        <a href="./user-settings.html"><i class="fa-solid fa-user"></i></a>
+        <a href="./user-settings.php"><i class="fa-solid fa-user"></i></a>
       </div>
+      <img src="../assets/images/close.png" alt="" id="close">
+        <img src="../assets/images/menu.png" alt="" id="menu">
     </header>
     <main>
-      <div class="side-bar">
+      <div class="side-bar" id="side-bar">
         <ul>
           <li>
-            <a href="#" class="active"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="./home.php" ><i class="fa-solid fa-house"></i>Home</a>
           </li>
           <li>
-            <a href="./plants.html"
+            <a href="./plants.php"
               ><i class="fa-solid fa-seedling"></i>My Plants</a
             >
           </li>
           <li>
-            <a href="./addnew.html"><i class="fa-solid fa-plus"></i>Add new</a>
+            <a href="./addnew.php"><i class="fa-solid fa-plus"></i>Add new</a>
           </li>
           <li>
-            <a href="./discover.html"
+            <a href="./discover.php"
               ><i class="fa-solid fa-magnifying-glass"></i>Discover</a
             >
           </li>
         </ul>
       </div>
       <div class="main-content">
-        <div class="profile-info">
+      
+        <div><?php
+              if (isset($_SESSION['error_update'])) {
+              echo($_SESSION['error_update']);
+              unset($_SESSION['error_update']);
+            }?></div>
+            <div><div class="profile-info">
           <div class="container">
             <div class="profile-pic">
               <img
@@ -67,7 +102,7 @@
                 alt="Profile Picture"
               />
             </div>
-            <div class="profile-plants">Plants owned: 8</div>
+            <div class="profile-plants">Plants owned: <?php echo $plantCount; ?></div>
             <button id="editButton">
               <i class="fa-solid fa-pen-to-square"></i>Edit
             </button>
@@ -91,7 +126,7 @@
           </div>
 
           <div class="profile-settings">
-            <form id="ProfileForm">
+            <form id="ProfileForm" action="../backend/users/UserUpdate.php" method="POST">
               <div class="groups">
                 <div class="form-group">
                   <input
@@ -100,7 +135,7 @@
                     name="name"
                     class="input-field"
                     required
-                    value="Behare"
+                    value="<?php echo $user->getName()?>"
                   />
                   <span class="label">Name:</span>
                   <span class="error-message" id="nameError"></span>
@@ -112,23 +147,13 @@
                     name="surname"
                     class="input-field"
                     required
-                    value="Test"
+                    value="<?php echo $user->getSurname()?>"
                   />
                   <span class="label">Surname:</span>
                   <span class="error-message" id="surnameError"></span>
                 </div>
               </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  class="input-field"
-                  required
-                />
-                <span class="label">Username:</span>
-                <span class="error-message" id="usernameError"></span>
-              </div>
+              
 
               <div class="form-group">
                 <input
@@ -137,6 +162,7 @@
                   name="email"
                   class="input-field"
                   required
+                  value=" <?php echo $user->getEmail()?>"
                 />
                 <span class="label">Email:</span>
                 <span class="error-message" id="emailError"></span>
@@ -147,9 +173,19 @@
                   id="password"
                   name="password"
                   class="input-field"
-                  required
+                 
+                 
                 />
-                <span class="label">Password:</span>
+                <?php if (isset($_SESSION['error_message'])): ?>
+                    <div class="error-message">
+                        <?php 
+                        echo $_SESSION['error_message']; 
+                        unset($_SESSION['error_message']); 
+                        ?>
+                    </div>
+                <?php endif; ?>
+
+                <span class="label">New Password:</span>
                 <span class="error-message" id="passwordError"></span>
               </div>
               <div class="form-group">
@@ -158,19 +194,25 @@
                   id="confirm-password"
                   name="confirm-password"
                   class="input-field"
-                  required
+                 
                 />
                 <span class="label">Confirm Password:</span>
                 <span class="error-message" id="confirm-passwordError"></span>
               </div>
 
-              <button type="submit">Submit</button>
+              <button type="submit">Update</button>
+              <a class="logout-phone" href="../backend/users/logout.php">Logout</a>
             </form>
+            
           </div>
-        </div>
+         
+        </div> </div>
+        
+        <a class="logout" href="../backend/users/logout.php">Logout</a>
       </div>
     </main>
     <script src="../functionalities/clock.js"></script>
     <script src="../functionalities/profile.js"></script>
+    <script src="../functionalities/responsive.js"></script>
   </body>
 </html>

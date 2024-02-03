@@ -1,3 +1,19 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) { 
+   header("Location: ./login.php");
+   exit();
+}
+
+?>
+<?php
+require_once '../backend/plants/plantsCollection.php';
+
+$userId = $_SESSION['user_id'];
+
+$plantsCollection = new PlantsCollection($userId);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,14 +49,16 @@
       </div>
       <div class="user">
         <div class="time-container" id="current-time"></div>
-        <a href="./user-settings.html"><i class="fa-solid fa-user"></i></a>
+        <a href="./user-settings.php"><i class="fa-solid fa-user"></i></a>
       </div>
+      <img src="../assets/images/close.png" alt="" id="close">
+        <img src="../assets/images/menu.png" alt="" id="menu">
     </header>
     <main>
-      <div class="side-bar">
+      <div class="side-bar" id="side-bar">
         <ul>
           <li>
-            <a href="./plant.html"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="./home.php"><i class="fa-solid fa-house"></i>Home</a>
           </li>
           <li>
             <a href="#" class="active"
@@ -48,54 +66,23 @@
             >
           </li>
           <li>
-            <a href="./addnew.html"><i class="fa-solid fa-plus"></i>Add new</a>
+            <a href="./addnew.php"><i class="fa-solid fa-plus"></i>Add new</a>
           </li>
           <li>
-            <a href="./discover.html"
+            <a href="./discover.php"
               ><i class="fa-solid fa-magnifying-glass"></i>Discover</a
             >
           </li>
         </ul>
       </div>
       <div class="main-content">
-        <h2 class="all-plants">Click to view your plant</h2>
-        <div class="plants">
-          <a href="./plant.html"
-            ><div class="plants-card">
-              <h2>Peace Lily</h2>
-              <img src="../assets/images/peacelily.png" alt="" /></div
-          ></a>
-          <div class="plants-card">
-            <h2>Begonia</h2>
-            <img src="../assets/images/begonia.png" alt="" />
-          </div>
-          <div class="plants-card">
-            <h2>Cactus</h2>
-            <img src="../assets/images/image-cactus.png" alt="" />
-          </div>
-          <div class="plants-card">
-            <h2>Snake Plant</h2>
-            <img src="../assets/images/image-snake.png" alt="" />
-          </div>
-          <div class="plants-card">
-            <h2>Jade</h2>
-            <img src="../assets/images/jade.png" alt="" />
-          </div>
-          <div class="plants-card">
-            <h2>Peace Lily</h2>
-            <img src="../assets/images/image-snake.png" alt="" />
-          </div>
-          <div class="plants-card">
-            <h2>Peace Lily</h2>
-            <img src="../assets/images/peacelily.png" alt="" />
-          </div>
-          <div class="plants-card">
-            <h2>Peace Lily</h2>
-            <img src="../assets/images/begonia1.png" alt="" />
-          </div>
-        </div>
-      </div>
+    <h2 class="all-plants">Click to view your plant</h2>
+    <div class="plants">
+        <?php $plantsCollection->displayPlants(); ?>
+    </div>
+</div>
     </main>
     <script src="../functionalities/clock.js"></script>
+    <script src="../functionalities/responsive.js"></script>
   </body>
 </html>

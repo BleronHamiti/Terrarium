@@ -1,7 +1,26 @@
 const sunImage = document.getElementById("sunImage");
 const servicesCardHolder = document.querySelector(".services-card-holder");
 const cloudImage = document.getElementById("cloudImage");
+const menuIcon = document.getElementById("menu");
+const menuList = document.getElementById("menu-list");
+const closeIcon = document.getElementById("close");
+const listItems = document.querySelectorAll("li");
 
+menuIcon.addEventListener("click", () => {
+  menuList.classList.add("show");
+  closeIcon.classList.add("active");
+});
+closeIcon.addEventListener("click", () => {
+  menuList.classList.remove("show");
+  closeIcon.classList.remove("active");
+});
+listItems.forEach(function (item) {
+  console.log();
+  item.addEventListener("click", () => {
+    menuList.classList.remove("show");
+    closeIcon.classList.remove("active");
+  });
+});
 function updateSunOpacity() {
   if (
     servicesCardHolder.scrollLeft >=

@@ -357,7 +357,7 @@ select:focus {
   margin: 1rem;
 }
 .plants-card img {
-  height: 90%;
+  width: 90%;
 }
 .plants-card h2 {
   margin: 0;
@@ -431,8 +431,8 @@ select:focus {
 .home-images {
   background-color: #f1f8ed;
   border-radius: 0.5rem;
-  width: 200px;
-  height: 200px;
+  width: 130px;
+  height: 180px;
   margin: 0.5rem;
   display: flex;
   justify-content: center;
@@ -479,12 +479,15 @@ select:focus {
 .noti-banner a:hover {
   background-color: #e1eed9;
 }
+.wrap-discover {
+  margin: 0.8rem;
+}
 .discover-home {
   width: 100%;
   height: 300px;
   border-radius: 0.75rem;
   overflow: hidden;
-  margin: 1rem;
+
   position: relative;
   transition: all 0.7s;
 }
@@ -615,7 +618,6 @@ button {
   background-color: #e1eed9;
 }
 
-/* Hide the actual file input */
 .file-input-hidden {
   display: none;
 }
@@ -626,7 +628,7 @@ button {
   border: none;
   width: 175px;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 25px;
   color: white;
   transition: all 0.5s;
@@ -676,4 +678,178 @@ button {
   font-size: 1.2rem;
   margin: 1rem;
   color: #2d4126;
+}
+a {
+  text-decoration: none;
+}
+#close {
+  display: none;
+}
+#menu {
+  display: none;
+}
+@media (max-width: 1218px) {
+  .plants-home div:nth-child(1) {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  .side-bar {
+    display: none;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+  .time-container {
+    display: none;
+  }
+  .user a {
+    margin: 0;
+  }
+  .user i {
+    font-size: 1.4rem;
+  }
+  .search i {
+    font-size: 1rem;
+  }
+  header input {
+    font-size: 0.7rem;
+  }
+  #menu {
+    display: block;
+    width: 30px;
+  }
+  header img {
+    width: 60px;
+  }
+  .show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+  }
+  .show ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .visible {
+    display: block !important;
+    z-index: 101;
+    width: 30px;
+  }
+}
+@media (max-width: 900px) {
+  .info {
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .care-section {
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+@media (max-width: 819px) {
+  .inputs {
+    flex-direction: column;
+  }
+  #plant-form input {
+    width: 315px;
+  }
+}
+@media (max-width: 767px) {
+  .content-home {
+    flex-direction: column;
+    padding: 14px;
+    gap: 10px;
+  }
+  .add-new-home {
+    width: 100%;
+    padding: 10px;
+  }
+  .add-new-home span {
+    text-align: center;
+  }
+  .all-plants-home {
+    width: 100%;
+  }
+  .wrap-discover {
+    display: none;
+  }
+}
+@media (max-width: 570px) {
+  .calendar-container {
+    width: 350px;
+    overflow-x: scroll;
+  }
+}
+@media (max-width: 380px) {
+  .plants-home div:nth-child(2) {
+    display: none;
+  }
+  .calendar-container {
+    width: 300px;
+    overflow-x: scroll;
+  }
+}
+.error-message,
+.error-update {
+  color: red;
+}
+.logout {
+  background-color: #3b5f2e;
+  border-radius: 12px;
+  color: white;
+  padding: 10px 20px;
+
+  margin: 10px auto;
+  font-size: 24px;
+}
+.logout-phone {
+  display: none;
+  background-color: #3b5f2e;
+  border-radius: 12px;
+  color: white;
+  padding: 10px 20px;
+
+  margin: 10px auto;
+  font-size: 24px;
+}
+@media (max-width: 768px) {
+  .profile-info {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .profile-settings {
+    width: 100%;
+  }
+  .logout {
+    margin: 10px;
+    display: none;
+  }
+  .logout-phone {
+    display: block;
+    width: 110px;
+    font-size: 20px;
+    margin: 10px 0px;
+  }
+  #editButton,
+  #modalSaveButton,
+  #ProfileForm button {
+    font-size: 20px;
+  }
+  .form-group input {
+    font-size: 18px;
+  }
+  .main-content {
+    overflow-x: hidden;
+  }
 }

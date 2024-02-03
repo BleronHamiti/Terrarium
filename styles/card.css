@@ -76,7 +76,7 @@
   font-size: 1.1rem;
 }
 .plant-care {
-  height: 265px;
+  height: 190px;
 }
 .impact-card img {
   height: 100%;
@@ -157,4 +157,19 @@
 }
 .days-watered span {
   font-size: 1.3rem;
+}
+@media (max-width: 767px) {
+  .impact-card {
+    width: 300px;
+    flex-direction: column;
+  }
+  .plant-group {
+    flex-direction: column;
+  }
+  .info-noti {
+    width: auto;
+  }
+  .notifications {
+    flex-direction: column;
+  }
 }
